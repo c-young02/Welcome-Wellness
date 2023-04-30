@@ -3,7 +3,14 @@ const router = express.Router();
 const controller = require('../controllers/wellbeingControllers.js');
 
 router.get('/', controller.showHome);
+router.get('/nutrition', controller.showNutrition);
+router.get('/fitness', controller.showFitness);
+router.get('/lifestyle', controller.showLifestyle);
+router.get('/goals', controller.showGoals);
 router.get('/about', controller.showAbout);
+router.get('/login', controller.showLogin);
+router.get('/register', controller.showRegister);
+router.get('/privacy', controller.showPrivacy);
 
 router.use(function (req, res) {
 	res.status(404);

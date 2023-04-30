@@ -1,9 +1,43 @@
-<html>
-<head>
-    {{>header}}
-</head>
-{{>topnav}}
-	<body>
-		<h1 class="text-center">{{title}}</h1>
+<html lang="en">
+	<head>
+		{{>header}}
+	</head>
+	<body class="d-flex flex-column min-vh-100">
+		<header>
+			{{>topnav}}
+		</header>
+		<div class="container text-center my-5">
+			<h1 class="display-1 ">{{title}}</h1>
+			<p>Page Description</p>
+			<div class="row pt-5">
+				<div class="col-md-4">
+					<div class="thumbnail border border-secondary">
+						<img src="./images/register.jpg" alt="Lights" style="width:100%">
+						<div class="caption">
+							<p class="my-3">Register or sign in to an account.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<img src="./images/fruit.jpg" alt="Nature" style="width:100%">
+						<div class="caption">
+							<p>View information about nutrition, fitness, and lifestyle</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<img src="./images/fruit.jpg" alt="Fjords" style="width:100%">
+						<div class="caption">
+							<p>Create, update and track your personal goals.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="mt-auto">
+			{{>footer}}
+		</footer>
 	</body>
 </html>

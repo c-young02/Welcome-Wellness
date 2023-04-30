@@ -1,13 +1,30 @@
-<html>
+<html lang="en">
 	<head>
 		{{>header}}
 	</head>
-	{{>topnav}}
-	<body>
-	<div class="container-fluid text-center my-5">
-		<h1 class="display-1 ">{{title}}</h1>
-		<p>Page Description</p>
+	<body class="d-flex flex-column min-vh-100">
+		<header>
+			{{>topnav}}
+		</header>
+		<div class="container text-center my-5">
+			<h1 class="display-1 ">{{title}}</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor, dui eu imperdiet fermentum, enim ex gravida nibh, ut consectetur magna lectus at erat. Nam vel facilisis enim. Donec interdum lacus et fermentum commodo. In sed justo nec dui consequat. </p>
+			<div class="container-fluid mb-5">
+				<img src="./images/fruit.jpg" class="img-fluid" alt="Decorative Image">
+			</div>
 		</div>
+		<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+          </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
+		<footer class="mt-auto">
+			{{>footer}}
+		</footer>
 	</body>
-	{{>footer}}
 </html>
