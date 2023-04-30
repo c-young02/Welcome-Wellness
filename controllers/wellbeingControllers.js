@@ -1,6 +1,6 @@
 exports.showHome = function (req, res) {
 	res.render('home', {
-		title: 'Home',
+		title: 'Welcome Wellness',
 	});
 };
 

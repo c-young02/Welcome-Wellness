@@ -1,28 +1,30 @@
 {
-  "name": "wad2-cw2",
-  "version": "1.0.0",
-  "description": "A wellbeing web application developed using Node, Express, JavaScript and Mustache",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/c-young02/WAD2-CW2.git"
-  },
-  "author": "Callum Young",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/c-young02/WAD2-CW2/issues"
-  },
-  "homepage": "https://github.com/c-young02/WAD2-CW2#readme",
-  "dependencies": {
-    "bootstrap": "^5.2.3",
-    "cookieparser": "^0.1.0",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mustache-express": "^1.3.2",
-    "nedb": "^1.8.0",
-    "path": "^0.12.7"
-  }
+	"name": "wad2-cw2",
+	"version": "1.0.0",
+	"description": "A wellbeing web application developed using Node, Express, JavaScript and Mustache",
+	"main": "index.js",
+	"scripts": {
+		"start": "node ./index.js",
+		"dev": "nodemon -e js,mustache ./index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/c-young02/WAD2-CW2.git"
+	},
+	"author": "Callum Young",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/c-young02/WAD2-CW2/issues"
+	},
+	"homepage": "https://github.com/c-young02/WAD2-CW2#readme",
+	"dependencies": {
+		"bootstrap": "^5.2.3",
+		"cookieparser": "^0.1.0",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"mustache-express": "^1.3.2",
+		"nedb": "^1.8.0",
+		"path": "^0.12.7"
+	}
 }
