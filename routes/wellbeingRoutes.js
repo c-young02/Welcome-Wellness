@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/wellbeingControllers.js');
+const auth = require('../auth/auth.js');
+const { ensureLoggedIn } = require('connect-ensure-login');
 
 router.get('/', controller.showHome);
 router.get('/nutrition', controller.showNutrition);
@@ -11,6 +13,9 @@ router.get('/about', controller.showAbout);
 router.get('/login', controller.showLogin);
 router.get('/register', controller.showRegister);
 router.get('/privacy', controller.showPrivacy);
+
+router.post('/register', controller.registerUser);
+router.post('/login', auth.authorize('/login'), controller.postLogin);
 
 router.use(function (req, res) {
 	res.status(404);

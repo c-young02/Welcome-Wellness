@@ -30,10 +30,17 @@
 	<div class="container text-center mx-5">
 		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 			<ul class="navbar-nav">
+			{{^user}}
 				<li class="nav-item px-3">
 					<a class="nav-link" href="/login"> Sign in </a>
 				</li>
 				<a class="btn btn-secondary px-3 pt-2" href="/register" role="button">Register</a>
+				{{/user}}
+				{{#user}}
+  <a id="logout" href="/logout" class="btn btn-primary">
+    Sign out
+  </a>
+{{/user}}
 			</ul>
 		</div>
 	</div>
