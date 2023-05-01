@@ -91,3 +91,19 @@ exports.authorize = function (redirect) {
 exports.postLogin = function (req, res) {
 	res.redirect('/');
 };
+
+exports.logout = function (req, res, next) {
+	req.logout(function (err) {
+		if (err) {
+			return next(err);
+		}
+		res.redirect('/');
+	});
+};
+
+exports.checkNotAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated()) {
+		return res.redirect('/');
+	}
+	next();
+};

@@ -5,17 +5,31 @@ const auth = require('../auth/auth.js');
 const { ensureLoggedIn } = require('connect-ensure-login');
 
 router.get('/', controller.showHome);
-router.get('/nutrition', controller.showNutrition);
-router.get('/fitness', controller.showFitness);
-router.get('/lifestyle', controller.showLifestyle);
-router.get('/goals', controller.showGoals);
+router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
+router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
+router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
+router.get('/goals', ensureLoggedIn('/login'), controller.showGoals);
 router.get('/about', controller.showAbout);
-router.get('/login', controller.showLogin);
-router.get('/register', controller.showRegister);
+router.get('/login', controller.checkNotAuthenticated, controller.showLogin);
+router.get(
+	'/register',
+	controller.checkNotAuthenticated,
+	controller.showRegister
+);
 router.get('/privacy', controller.showPrivacy);
 
-router.post('/register', controller.registerUser);
-router.post('/login', auth.authorize('/login'), controller.postLogin);
+router.post(
+	'/register',
+	controller.checkNotAuthenticated,
+	controller.registerUser
+);
+router.post(
+	'/login',
+	controller.checkNotAuthenticated,
+	auth.authorize('/login'),
+	controller.postLogin
+);
+router.get('/logout', controller.logout);
 
 router.use(function (req, res) {
 	res.status(404);
