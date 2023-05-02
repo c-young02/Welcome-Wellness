@@ -20,6 +20,7 @@ class Wellbeing {
 			date: '12-05-22',
 			complete: false,
 			compDate: '',
+			_id: 'uerht9uhw',
 		});
 		//for later debugging
 		console.log('Goal 1 inserted');
@@ -33,6 +34,7 @@ class Wellbeing {
 			date: '12-05-22',
 			complete: false,
 			compDate: '',
+			_id: 'dfgdfghtr563',
 		});
 		//for later debugging
 		console.log('Goal 2 inserted');
@@ -46,6 +48,7 @@ class Wellbeing {
 			date: '12-05-22',
 			complete: true,
 			compDate: '12-05-22',
+			_id: '34hidf97',
 		});
 		//for later debugging
 		console.log('Goal 3 inserted');
@@ -113,6 +116,24 @@ class Wellbeing {
 					console.log('getCompleteGoals returns: ', complete);
 				}
 			});
+		});
+	}
+
+	completeGoal(goalId) {
+		return new Promise((resolve, reject) => {
+			this.db.update(
+				{ _id: goalId },
+				{ $set: { complete: true } },
+				{},
+				(err, numUpdated) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(numUpdated);
+						const alert = 'Goal marked complete';
+					}
+				}
+			);
 		});
 	}
 }

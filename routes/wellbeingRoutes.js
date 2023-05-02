@@ -9,6 +9,7 @@ router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
 router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
 router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
 router.get('/goals', ensureLoggedIn('/login'), controller.getGoals);
+router.get('/goals/:_id', controller.completeGoal);
 router.get('/complete', ensureLoggedIn('/login'), controller.getCompleteGoals);
 router.get('/create', ensureLoggedIn('/login'), controller.createGoal);
 router.get('/about', controller.showAbout);

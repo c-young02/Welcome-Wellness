@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-require('dotenv').config(); // loads data from .env file
+require('dotenv').config();
+const flash = require('connect-flash');
 
 app.use(
 	express.urlencoded({
@@ -29,6 +30,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 auth.init(app);
+app.use(flash());
 
 const mustache = require('mustache-express');
 app.engine('mustache', mustache());

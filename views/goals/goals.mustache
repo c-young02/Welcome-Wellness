@@ -26,6 +26,11 @@
 					<a href="/create" class="btn btn-secondary btn-lg" role="button">Create Goal</a>
 				</div>
 			</div>
+			{{#message}}
+				<div class="alert alert-success" role="alert">
+					{{message}}
+				</div>
+			{{/message}}
 			<div class="row">
 				{{#goals}}
 					<div class="col-sm-3 mb-3">
@@ -41,7 +46,7 @@
 										<h7 class="card-text">Repetitions: {{repetitions}}</h7>
 									</div>
 									<div class="col">
-										<a href="#" class="btn btn-primary btn-md mt-1">Complete</a>
+										<a href="/goals/{{_id}}" class="btn btn-primary btn-md mt-1">Complete</a>
 									</div>
 								</div>
 							</div>

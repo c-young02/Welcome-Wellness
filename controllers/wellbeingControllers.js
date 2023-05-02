@@ -73,7 +73,7 @@ exports.registerUser = function (req, res) {
 			return;
 		}
 		userDao.create(user, password);
-		console.log('Registered user', user, 'password', password);
+		console.log('Registered user');
 		res.redirect('/login');
 	});
 };
@@ -123,12 +123,14 @@ exports.createEntry = function (req, res) {
 
 exports.getGoals = function (req, res) {
 	let user = req.user.user;
+	const successMsg = req.flash('success');
 	db.getGoals(user)
 		.then((goals) => {
 			res.render('goals/goals', {
 				title: 'Goals',
 				user: req.user,
 				goals: goals,
+				message: successMsg,
 			});
 		})
 		.catch((err) => {
@@ -150,5 +152,40 @@ exports.getCompleteGoals = function (req, res) {
 		.catch((err) => {
 			console.log('Error: ');
 			console.log(JSON.stringify(err));
+		});
+};
+
+exports.completeGoal = function (req, res) {
+	const goalId = req.params._id;
+	db.completeGoal(goalId)
+		.then(() => {
+			req.flash('success', 'Goal marked as complete');
+			res.redirect('/goals');
+		})
+		.catch((err) => {
+			console.log('Error: ');
+			console.log(JSON.stringify(err));
+			res.status(500).send('Error marking goal as complete');
+		});
+};
+
+exports.compldsdseteGoal = function (req, res) {
+	const goalId = req.params._id;
+	let user = req.user.user;
+	db.completeGoal(goalId)
+		.then(() => {
+			db.getGoals(user).then((goals) => {
+				res.render('goals/goals', {
+					title: 'Goals',
+					user: req.user,
+					goals: goals,
+					message: 'Goals marked as complete',
+				});
+			});
+		})
+		.catch((err) => {
+			console.log('Error: ');
+			console.log(JSON.stringify(err));
+			res.status(500).send('Error marking goal as complete');
 		});
 };
