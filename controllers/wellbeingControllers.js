@@ -3,6 +3,7 @@ const userDao = require('../models/userModel.js');
 const auth = require('../auth/auth.js');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const db = new wellbeingDAO();
+db.init(); //!remove
 
 exports.showHome = function (req, res) {
 	res.render('home', {
@@ -12,29 +13,36 @@ exports.showHome = function (req, res) {
 };
 
 exports.showNutrition = function (req, res) {
-	res.render('protected/nutrition', {
+	res.render('wellbeing/nutrition', {
 		title: 'Nutrition',
 		user: req.user,
 	});
 };
 
 exports.showFitness = function (req, res) {
-	res.render('protected/fitness', {
+	res.render('wellbeing/fitness', {
 		title: 'Fitness',
 		user: req.user,
 	});
 };
 
 exports.showLifestyle = function (req, res) {
-	res.render('protected/lifestyle', {
+	res.render('wellbeing/lifestyle', {
 		title: 'Lifestyle',
 		user: req.user,
 	});
 };
 
 exports.showGoals = function (req, res) {
-	res.render('protected/goals', {
+	res.render('goals/goals', {
 		title: 'Goals',
+		user: req.user,
+	});
+};
+
+exports.createGoal = function (req, res) {
+	res.render('goals/createGoal', {
+		title: 'Create Goal',
 		user: req.user,
 	});
 };
@@ -55,13 +63,6 @@ exports.showLogin = function (req, res) {
 exports.showRegister = function (req, res) {
 	res.render('user/register', {
 		title: 'Register',
-	});
-};
-
-exports.showPrivacy = function (req, res) {
-	res.render('privacy', {
-		title: 'Privacy',
-		user: req.user,
 	});
 };
 
@@ -106,4 +107,23 @@ exports.checkNotAuthenticated = function (req, res, next) {
 		return res.redirect('/');
 	}
 	next();
+};
+
+exports.createEntry = function (req, res) {
+	console.log('Creating new entry');
+	const user = req.user.user;
+	if (!user) {
+		console.log('no user');
+		response.status(400).send('Entries must have an author.');
+		return;
+	}
+	db.addEntry(
+		user,
+		req.body.title,
+		req.body.description,
+		req.body.type,
+		req.body.repetitions,
+		req.body.date
+	);
+	res.redirect('/goals');
 };

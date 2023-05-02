@@ -8,7 +8,7 @@ router.get('/', controller.showHome);
 router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
 router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
 router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
-router.get('/goals', ensureLoggedIn('/login'), controller.showGoals);
+router.get('/goals', controller.showGoals);
 router.get('/create', controller.createGoal);
 router.get('/about', controller.showAbout);
 router.get('/login', controller.checkNotAuthenticated, controller.showLogin);
