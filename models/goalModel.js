@@ -135,5 +135,18 @@ class Wellbeing {
 			);
 		});
 	}
+
+	searchGoal(user, title) {
+		return new Promise((resolve, reject) => {
+			this.db.find({ author: user, title: title }, function (err, goals) {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(goals);
+					console.log('Search returns: ', goals);
+				}
+			});
+		});
+	}
 }
 module.exports = Wellbeing;

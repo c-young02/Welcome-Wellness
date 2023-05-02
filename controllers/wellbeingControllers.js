@@ -174,3 +174,28 @@ exports.completeGoal = function (req, res) {
 			res.status(500).send('Error marking goal as complete');
 		});
 };
+
+exports.searchGoal = function (req, res) {
+	console.log('searching author name', req.body.title);
+	let user = req.user.user;
+	let title = req.body.title;
+
+	db.searchGoal(user, title)
+		.then((goals) => {
+			if (goals.length > 0) {
+				res.render('goals/goals', {
+					title: 'Goals',
+					goals: goals,
+				});
+			} else {
+				res.render('goals/goals', {
+					title: 'Goal Not Found',
+					user: req.user,
+					error: 'Goal not found',
+				});
+			}
+		})
+		.catch((err) => {
+			console.log('error handling search', err);
+		});
+};

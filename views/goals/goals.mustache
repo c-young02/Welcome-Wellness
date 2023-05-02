@@ -10,50 +10,58 @@
 			<h1 class="display-1 ">{{title}}</h1>
 			<div class="row py-3 my-5 border-bottom">
 				<div class="col">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Goal title...">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button">
-								<i class="fa-solid fa-magnifying-glass"></i>Search </button>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<button type="button" class="btn btn-lg btn-primary" disabled>Progress</button>
-					<a href="/complete" class="btn btn-outline-secondary btn-lg" role="button">Complete</a>
-				</div>
-				<div class="col">
-					<a href="/create" class="btn btn-secondary btn-lg" role="button">Create Goal</a>
+					<form action="/search" method="post">
+						<div class="input-group">
+							<input type="text" class="form-control" id="title" name="title" placeholder="Goal title...">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="submit">
+									<i class="fa-solid fa-magnifying-glass"></i>Search </button>
+							</div>
+					</form>
 				</div>
 			</div>
-			{{#message}}
-				<div class="alert alert-success" role="alert">
-					{{message}}
-				</div>
-			{{/message}}
-			<div class="row">
-				{{#goals}}
-					<div class="col-sm-3 mb-3">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">{{title}}
-									<i class="fa-solid fa-{{type}}"></i>
-								</h5>
-								<h6 class="card-subtitle mb-2 text-muted">{{description}}</h6>
-								<div class="row">
-									<div class="col-md">
-										<h7 class="card-text">Due: {{date}}</h7>
-										<h7 class="card-text">Repetitions: {{repetitions}}</h7>
-									</div>
-									<div class="col">
-										<a href="/goals/{{_id}}" class="btn btn-primary btn-md mt-1">Complete</a>
-									</div>
+			<div class="col">
+				<button type="button" class="btn btn-lg btn-primary" disabled>Progress</button>
+				<a href="/complete" class="btn btn-outline-secondary btn-lg" role="button">Complete</a>
+			</div>
+			<div class="col">
+				<a href="/create" class="btn btn-secondary btn-lg" role="button">Create Goal</a>
+			</div>
+		</div>
+		{{#message}}
+			<div class="alert alert-success" role="alert">
+				{{message}}
+			</div>
+		{{/message}}
+				{{#error}}
+			<div class="alert alert-danger" role="alert">
+				{{error}}
+				<a href="/goals">return to all goals</a>
+			</div>
+		{{/error}}
+		<div class="row">
+			{{#goals}}
+				<div class="col-sm-3 mb-3">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">{{title}}
+								<i class="fa-solid fa-{{type}}"></i>
+							</h5>
+							<h6 class="card-subtitle mb-2 text-muted">{{description}}</h6>
+							<div class="row">
+								<div class="col-md">
+									<h7 class="card-text">Due: {{date}}</h7>
+									<h7 class="card-text">Repetitions: {{repetitions}}</h7>
+								</div>
+								<div class="col">
+									<a href="/goals/{{_id}}" class="btn btn-primary btn-md mt-1">Complete</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				{{/goals}}
-			</div>
+				</div>
+			{{/goals}}
+		</div>
 		</div>
 		<footer class="mt-auto">
 			{{>components/footer}}
