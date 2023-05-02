@@ -8,7 +8,55 @@
 		</header>
 		<div class="container text-center my-5">
 			<h1 class="display-1 ">{{title}}</h1>
-			<p>Page Description</p>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="mx-auto col-10 col-md-8 col-lg-5">
+					<!-- Form -->
+					<form action="/create" method="post">
+						<!-- Input fields -->
+								{{#goal}}
+
+						<div class="form-group">
+							<label for="title">Goal Title</label>
+							<input type="text" class="form-control form-control-lg" id="title" value="{{title}}" name="title" maxlength = "20" required />
+						</div>
+						<div class="form-group">
+							<label for="description">Description</label>
+							<input type="text" class="form-control form-control-lg" id="description" value="{{description}}" name="description" maxlength = "300" required />
+						</div>
+						<div class="form-group">
+							<label for="type">Goal Type:</label>
+							<select class="form-control form-control-lg" id="type" name="type" required>
+								<option selected disabled value="">Goal Type</option>
+								<option value="apple-whole">Nutrition</option>
+								<option value="person-running">Fitness</option>
+								<option value="heart-pulse">Lifestyle</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="repetitions">Repetitions (optional)</label>
+							<input type="number" min="0" class="form-control form-control-lg" id="repetitions" value="{{repetitions}}" name="repetitions" max="9999"/>
+						</div>
+						<div class="form-group">
+							<label for="date">Due Date (optional)</label>
+							<input type="date" class="form-control form-control-lg" id="date" value="{{date}}" name="date" />
+						</div>
+						<div class="form-group">
+							<label for="date">Completion Date (optional)</label>
+							<input type="date" class="form-control form-control-lg" id="date" value="{{compDate}}" name="date" />
+						</div>
+						<div class="d-grid gap-2">
+							<button type="submit" class="btn btn-lg btn-primary mt-3">Update</button>
+														<button type="delete" class="btn btn-lg btn-danger mt-3">Delete</button>
+
+						</div>
+					</form>
+							{{/goal}}
+
+					<!-- Form end -->
+				</div>
+			</div>
 		</div>
 		<footer class="mt-auto">
 			{{>components/footer}}

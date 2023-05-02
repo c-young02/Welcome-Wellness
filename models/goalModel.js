@@ -123,7 +123,12 @@ class Wellbeing {
 		return new Promise((resolve, reject) => {
 			this.db.update(
 				{ _id: goalId },
-				{ $set: { complete: true } },
+				{
+					$set: {
+						complete: true,
+						compDate: new Date().toISOString().split('T')[0], //sets complete date to current date
+					},
+				},
 				{},
 				(err, numUpdated) => {
 					if (err) {
@@ -139,9 +144,9 @@ class Wellbeing {
 	//Uses regular expression to perform partial search, i makes it case insensitive
 	searchGoal(user, title) {
 		return new Promise((resolve, reject) => {
-			const regex = new RegExp(title, 'i');
+			const regexpression = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: { $regex: regex }, complete: false },
+				{ author: user, title: { $regex: regexpression }, complete: false },
 				function (err, goals) {
 					if (err) {
 						reject(err);
@@ -156,9 +161,9 @@ class Wellbeing {
 
 	searchCompGoal(user, title) {
 		return new Promise((resolve, reject) => {
-			const regex = new RegExp(title, 'i');
+			const regexpression = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: { $regex: regex }, complete: true },
+				{ author: user, title: { $regex: regexpression }, complete: true },
 				function (err, complete) {
 					if (err) {
 						reject(err);
@@ -170,5 +175,21 @@ class Wellbeing {
 			);
 		});
 	}
+
+	showUpdate(user, goalId) {
+		return new Promise((resolve, reject) => {
+			console.log(`Finding goal ${goalId} for user ${user}`);
+			this.db.find({ author: user, _id: goalId }, function (err, goal) {
+				if (err) {
+					console.error(`Error finding goal: ${err}`);
+					reject(err);
+				} else {
+					console.log(`Found goal: ${JSON.stringify(goal)}`);
+					resolve(goal);
+				}
+			});
+		});
+	}
 }
+
 module.exports = Wellbeing;

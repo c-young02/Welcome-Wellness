@@ -179,7 +179,6 @@ exports.searchGoal = function (req, res) {
 	console.log('searching title', req.body.title);
 	let user = req.user.user;
 	let title = req.body.title;
-
 	db.searchGoal(user, title)
 		.then((goals) => {
 			if (goals.length > 0) {
@@ -222,5 +221,24 @@ exports.searchCompGoal = function (req, res) {
 		})
 		.catch((err) => {
 			console.log('error handling search', err);
+		});
+};
+
+exports.showUpdate = function (req, res) {
+	console.log(`Request to update goal with ID ${req.params._id}`);
+	let user = req.user.user;
+	const goalId = req.params._id;
+	db.showUpdate(user, goalId)
+		.then((goal) => {
+			console.log(`Rendering goal: ${JSON.stringify(goal)}`);
+			res.render('goals/updateGoal', {
+				title: 'Update Goal',
+				user: req.user,
+				goal: goal,
+			});
+		})
+		.catch((err) => {
+			console.log('Error: ');
+			console.log(JSON.stringify(err));
 		});
 };
