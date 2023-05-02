@@ -12,6 +12,11 @@ router.get('/goals', ensureLoggedIn('/login'), controller.getGoals);
 router.get('/goals/:_id', controller.completeGoal);
 router.get('/complete', ensureLoggedIn('/login'), controller.getCompleteGoals);
 router.post('/search', ensureLoggedIn('/login'), controller.searchGoal);
+router.post(
+	'/searchComplete',
+	ensureLoggedIn('/login'),
+	controller.searchCompGoal
+);
 router.get('/create', ensureLoggedIn('/login'), controller.createGoal);
 router.get('/about', controller.showAbout);
 router.get('/login', controller.checkNotAuthenticated, controller.showLogin);

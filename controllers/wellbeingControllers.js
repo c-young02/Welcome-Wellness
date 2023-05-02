@@ -199,3 +199,28 @@ exports.searchGoal = function (req, res) {
 			console.log('error handling search', err);
 		});
 };
+
+exports.searchCompGoal = function (req, res) {
+	console.log('searching author name', req.body.title);
+	let user = req.user.user;
+	let title = req.body.title;
+
+	db.searchCompGoal(user, title)
+		.then((complete) => {
+			if (complete.length > 0) {
+				res.render('goals/completeGoals', {
+					title: 'Complete Goals',
+					complete: complete,
+				});
+			} else {
+				res.render('goals/completeGoals', {
+					title: 'Goal Not Found',
+					user: req.user,
+					error: 'Goal not found',
+				});
+			}
+		})
+		.catch((err) => {
+			console.log('error handling search', err);
+		});
+};

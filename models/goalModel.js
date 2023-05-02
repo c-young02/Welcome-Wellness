@@ -138,14 +138,33 @@ class Wellbeing {
 
 	searchGoal(user, title) {
 		return new Promise((resolve, reject) => {
-			this.db.find({ author: user, title: title }, function (err, goals) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(goals);
-					console.log('Search returns: ', goals);
+			this.db.find(
+				{ author: user, title: title, complete: false },
+				function (err, goals) {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(goals);
+						console.log('Search returns: ', goals);
+					}
 				}
-			});
+			);
+		});
+	}
+
+	searchCompGoal(user, title) {
+		return new Promise((resolve, reject) => {
+			this.db.find(
+				{ author: user, title: title, complete: true },
+				function (err, complete) {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(complete);
+						console.log('Search returns: ', complete);
+					}
+				}
+			);
 		});
 	}
 }
