@@ -48,14 +48,18 @@ exports.showAbout = function (req, res) {
 };
 
 exports.showLogin = function (req, res) {
+	const registered = req.flash('registered');
 	res.render('user/login', {
 		title: 'Sign in',
+		message: registered,
 	});
 };
 
 exports.showRegister = function (req, res) {
+	const failureMsg = req.flash('failure');
 	res.render('user/register', {
 		title: 'Register',
+		message: failureMsg,
 	});
 };
 
@@ -69,11 +73,13 @@ exports.registerUser = function (req, res) {
 	}
 	userDao.lookup(user, function (err, u) {
 		if (u) {
-			res.send(401, 'User exists:', user);
+			req.flash('failure', 'User already exists');
+			res.redirect('/register');
 			return;
 		}
 		userDao.create(user, password);
 		console.log('Registered user');
+		req.flash('registered', 'Registration complete');
 		res.redirect('/login');
 	});
 };
