@@ -8,7 +8,7 @@
 		</header>
 		<div class="container text-center my-5">
 			<h1 class="display-1 ">{{title}}</h1>
-			<div class="row py-3 border-bottom">
+			<div class="row py-3 my-5 border-bottom">
 				<div class="col">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Goal title...">
@@ -26,15 +26,29 @@
 					<a href="/create" class="btn btn-secondary btn-lg" role="button">Create Goal</a>
 				</div>
 			</div>
-			{{#entries}}
-<div class="entry">
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p>Type: {{type}}</p>
-  <p>Repetitions: {{repetitions}}</p>
-  <p>Date: {{date}}</p>
-</div>
-{{/entries}}
+			<div class="row">
+				{{#goals}}
+					<div class="col-sm-3 mb-3">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{{title}}
+									<i class="fa-solid fa-{{type}}"></i>
+								</h5>
+								<h6 class="card-subtitle mb-2 text-muted">{{description}}</h6>
+								<div class="row">
+									<div class="col-md">
+										<h7 class="card-text">Due: {{date}}</h7>
+										<h7 class="card-text">Repetitions: {{repetitions}}</h7>
+									</div>
+									<div class="col">
+										<a href="#" class="btn btn-primary btn-md mt-1">Complete</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{{/goals}}
+			</div>
 		</div>
 		<footer class="mt-auto">
 			{{>components/footer}}

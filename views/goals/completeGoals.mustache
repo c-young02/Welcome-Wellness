@@ -8,7 +8,7 @@
 		</header>
 		<div class="container text-center my-5">
 			<h1 class="display-1 ">{{title}}</h1>
-			<div class="row py-3 border-bottom">
+			<div class="row py-3 my-5 border-bottom">
 				<div class="col">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Goal title...">
@@ -22,8 +22,27 @@
 					<a href="/goals" class="btn btn-outline-secondary btn-lg" role="button">Progress</a>
 					<button type="button" class="btn btn-lg btn-primary" disabled>Complete</button>
 				</div>
-				<div class="col">
-				</div>
+				<div class="col"></div>
+			</div>
+			<div class="row">
+				{{#complete}}
+					<div class="col-sm-3 mb-3">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{{title}}
+									<i class="fa-solid fa-{{type}}"></i>
+								</h5>
+								<h6 class="card-subtitle mb-2 text-muted">{{description}}</h6>
+								<div class="row">
+									<h7 class="card-text">Repetitions: {{repetitions}}</h7>
+								</div>
+								<div class="row">
+									<h7 class="card-text">Completed: {{compDate}}</h7>
+								</div>
+							</div>
+						</div>
+					</div>
+				{{/complete}}
 			</div>
 		</div>
 		<footer class="mt-auto">

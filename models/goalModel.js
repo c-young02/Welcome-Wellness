@@ -15,7 +15,7 @@ class Wellbeing {
 			author: 'CYoung',
 			title: 'Run',
 			description: 'go for a run',
-			type: 'Fitness',
+			type: 'person-running',
 			repetitions: 2,
 			date: '12-05-22',
 			complete: false,
@@ -28,7 +28,7 @@ class Wellbeing {
 			author: 'CYoung',
 			title: 'Sleep',
 			description: 'Get 8 hours sleep',
-			type: 'Lifestyle',
+			type: 'heart-pulse',
 			repetitions: '',
 			date: '12-05-22',
 			complete: false,
@@ -36,6 +36,19 @@ class Wellbeing {
 		});
 		//for later debugging
 		console.log('Goal 2 inserted');
+
+		this.db.insert({
+			author: 'CYoung',
+			title: 'Eat',
+			description: 'Eat some healthy food',
+			type: 'apple-whole',
+			repetitions: '',
+			date: '12-05-22',
+			complete: true,
+			compDate: '12-05-22',
+		});
+		//for later debugging
+		console.log('Goal 3 inserted');
 	}
 
 	getEntries() {
@@ -79,12 +92,25 @@ class Wellbeing {
 	}
 	getGoals(user) {
 		return new Promise((resolve, reject) => {
-			this.db.find({ author: user }, function (err, entries) {
+			this.db.find({ author: user, complete: false }, function (err, goals) {
 				if (err) {
 					reject(err);
 				} else {
-					resolve(entries);
-					console.log('getEntriesByUser returns: ', entries);
+					resolve(goals);
+					console.log('getGoals returns: ', goals);
+				}
+			});
+		});
+	}
+
+	getCompleteGoals(user) {
+		return new Promise((resolve, reject) => {
+			this.db.find({ author: user, complete: true }, function (err, complete) {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(complete);
+					console.log('getCompleteGoals returns: ', complete);
 				}
 			});
 		});
