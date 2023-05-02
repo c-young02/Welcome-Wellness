@@ -136,10 +136,12 @@ class Wellbeing {
 		});
 	}
 
+	//Uses regular expression to perform partial search, i makes it case insensitive
 	searchGoal(user, title) {
 		return new Promise((resolve, reject) => {
+			const regex = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: title, complete: false },
+				{ author: user, title: { $regex: regex }, complete: false },
 				function (err, goals) {
 					if (err) {
 						reject(err);
@@ -154,14 +156,15 @@ class Wellbeing {
 
 	searchCompGoal(user, title) {
 		return new Promise((resolve, reject) => {
+			const regex = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: title, complete: true },
+				{ author: user, title: { $regex: regex }, complete: true },
 				function (err, complete) {
 					if (err) {
 						reject(err);
 					} else {
 						resolve(complete);
-						console.log('Search returns: ', complete);
+						console.log('Search returns:', complete);
 					}
 				}
 			);

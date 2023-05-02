@@ -176,7 +176,7 @@ exports.completeGoal = function (req, res) {
 };
 
 exports.searchGoal = function (req, res) {
-	console.log('searching author name', req.body.title);
+	console.log('searching title', req.body.title);
 	let user = req.user.user;
 	let title = req.body.title;
 
@@ -201,7 +201,7 @@ exports.searchGoal = function (req, res) {
 };
 
 exports.searchCompGoal = function (req, res) {
-	console.log('searching author name', req.body.title);
+	console.log('searching title', req.body.title);
 	let user = req.user.user;
 	let title = req.body.title;
 
