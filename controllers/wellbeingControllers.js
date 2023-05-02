@@ -168,24 +168,3 @@ exports.completeGoal = function (req, res) {
 			res.status(500).send('Error marking goal as complete');
 		});
 };
-
-exports.compldsdseteGoal = function (req, res) {
-	const goalId = req.params._id;
-	let user = req.user.user;
-	db.completeGoal(goalId)
-		.then(() => {
-			db.getGoals(user).then((goals) => {
-				res.render('goals/goals', {
-					title: 'Goals',
-					user: req.user,
-					goals: goals,
-					message: 'Goals marked as complete',
-				});
-			});
-		})
-		.catch((err) => {
-			console.log('Error: ');
-			console.log(JSON.stringify(err));
-			res.status(500).send('Error marking goal as complete');
-		});
-};

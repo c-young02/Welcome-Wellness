@@ -130,7 +130,6 @@ class Wellbeing {
 						reject(err);
 					} else {
 						resolve(numUpdated);
-						const alert = 'Goal marked complete';
 					}
 				}
 			);
