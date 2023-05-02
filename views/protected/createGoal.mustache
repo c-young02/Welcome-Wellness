@@ -8,7 +8,45 @@
 		</header>
 		<div class="container text-center my-5">
 			<h1 class="display-1 ">{{title}}</h1>
-			<p>Page Description</p>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="mx-auto col-10 col-md-8 col-lg-5">
+					<!-- Form -->
+					<form action="/create" method="post">
+						<!-- Input fields -->
+						<div class="form-group">
+							<label for="title">Goal Title</label>
+							<input type="text" class="form-control form-control-lg" id="title" placeholder="Title..." name="title" required />
+						</div>
+						<div class="form-group">
+							<label for="description">Description</label>
+							<input type="text" class="form-control form-control-lg" id="description" placeholder="Description..." name="description" required />
+						</div>
+						<div class="form-group">
+							<label for="type">Goal Type:</label>
+							<select class="form-control form-control-lg" id="type" name="type" required>
+								<option selected disabled value="">Goal Type</option>
+								<option value="Nutrition">Nutrition</option>
+								<option value="Fitness">Fitness</option>
+								<option value="Lifestyle">Lifestyle</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="repetitions">Repetitions (optional)</label>
+							<input type="number" min="0" class="form-control form-control-lg" id="repetitions" placeholder="Repetitions..." name="repetitions" />
+						</div>
+						<div class="form-group">
+							<label for="date">Due Date (optional)</label>
+							<input type="date" class="form-control form-control-lg" id="date" name="date" />
+						</div>
+						<div class="d-grid gap-2">
+							<button type="submit" class="btn btn-lg btn-primary mt-3">Create</button>
+						</div>
+					</form>
+					<!-- Form end -->
+				</div>
+			</div>
 		</div>
 		<footer class="mt-auto">
 			{{>footer}}

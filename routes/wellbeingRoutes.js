@@ -9,6 +9,7 @@ router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
 router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
 router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
 router.get('/goals', ensureLoggedIn('/login'), controller.showGoals);
+router.get('/create', controller.createGoal);
 router.get('/about', controller.showAbout);
 router.get('/login', controller.checkNotAuthenticated, controller.showLogin);
 router.get(
@@ -16,8 +17,6 @@ router.get(
 	controller.checkNotAuthenticated,
 	controller.showRegister
 );
-router.get('/privacy', controller.showPrivacy);
-
 router.post(
 	'/register',
 	controller.checkNotAuthenticated,
@@ -29,6 +28,8 @@ router.post(
 	auth.authorize('/login'),
 	controller.postLogin
 );
+router.post('/create', ensureLoggedIn('/login'), controller.createEntry);
+
 router.get('/logout', controller.logout);
 
 router.use(function (req, res) {

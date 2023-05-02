@@ -30,23 +30,23 @@
 	<div class="container text-center mx-5">
 		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 			<ul class="navbar-nav">
-			{{^user}}
-				<li class="nav-item px-3">
-					<a class="nav-link" href="/login"> Sign in </a>
-				</li>
-				<a class="btn btn-secondary px-3 pt-2" href="/register" role="button">Register</a>
+				{{^user}}
+					<li class="nav-item px-3">
+						<a class="nav-link" href="/login"> Sign in </a>
+					</li>
+					<a class="btn btn-secondary px-3 pt-2" href="/register" role="button">Register</a>
 				{{/user}}
 				{{#user}}
-  <div class="dropdown">
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   		<img src="./images/user.png" width="50" height="50" alt="User icon" />
-   {{user}}
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" id="logout" href="/logout">Logout</a>
-  </div>
-</div>
-{{/user}}
+					<div class="dropdown">
+						<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="./images/user.png" width="50" height="50" alt="User icon" />
+							{{user}}
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" id="logout" href="/logout">Logout</a>
+						</div>
+					</div>
+				{{/user}}
 			</ul>
 		</div>
 	</div>
