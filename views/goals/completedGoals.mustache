@@ -19,22 +19,12 @@
 					</div>
 				</div>
 				<div class="col">
-					<button type="button" class="btn btn-lg btn-primary" disabled>Progress</button>
-					<a href="/complete" class="btn btn-outline-secondary btn-lg" role="button">Complete</a>
+					<a href="/goals" class="btn btn-outline-secondary btn-lg" role="button">Progress</a>
+					<button type="button" class="btn btn-lg btn-primary" disabled>Complete</button>
 				</div>
 				<div class="col">
-					<a href="/create" class="btn btn-secondary btn-lg" role="button">Create Goal</a>
 				</div>
 			</div>
-			{{#entries}}
-<div class="entry">
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p>Type: {{type}}</p>
-  <p>Repetitions: {{repetitions}}</p>
-  <p>Date: {{date}}</p>
-</div>
-{{/entries}}
 		</div>
 		<footer class="mt-auto">
 			{{>components/footer}}

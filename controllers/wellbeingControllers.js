@@ -40,6 +40,13 @@ exports.showGoals = function (req, res) {
 	});
 };
 
+exports.showComplete = function (req, res) {
+	res.render('goals/completedGoals', {
+		title: 'Completed Goals',
+		user: req.user,
+	});
+};
+
 exports.createGoal = function (req, res) {
 	res.render('goals/createGoal', {
 		title: 'Create Goal',
@@ -126,4 +133,20 @@ exports.createEntry = function (req, res) {
 		req.body.date
 	);
 	res.redirect('/goals');
+};
+
+exports.getGoals = function (req, res) {
+	let user = req.user.user;
+	db.getGoals(user)
+		.then((entries) => {
+			res.render('goals/goals', {
+				title: 'Goals',
+				user: req.user,
+				entries: entries,
+			});
+		})
+		.catch((err) => {
+			console.log('Error: ');
+			console.log(JSON.stringify(err));
+		});
 };

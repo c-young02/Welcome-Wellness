@@ -77,9 +77,9 @@ class Wellbeing {
 			}
 		});
 	}
-	getEntriesByUser(authorName) {
+	getGoals(user) {
 		return new Promise((resolve, reject) => {
-			this.db.find({ author: authorName }, function (err, entries) {
+			this.db.find({ author: user }, function (err, entries) {
 				if (err) {
 					reject(err);
 				} else {
