@@ -9,7 +9,7 @@ router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
 router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
 router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
 router.get('/goals', ensureLoggedIn('/login'), controller.getGoals);
-router.get('/goals/:_id', ensureLoggedIn, controller.completeGoal);
+router.get('/goals/:_id', controller.completeGoal);
 router.get('/complete', ensureLoggedIn('/login'), controller.getCompleteGoals);
 router.get('/update/:_id', ensureLoggedIn('/login'), controller.showUpdate);
 router.post('/search', ensureLoggedIn('/login'), controller.searchGoal);

@@ -17,7 +17,7 @@ class Wellbeing {
 			description: 'go for a run',
 			type: 'person-running',
 			repetitions: 2,
-			date: '12-05-22',
+			date: '2023-05-30',
 			complete: false,
 			compDate: '',
 			_id: 'uerht9uhw',
@@ -31,7 +31,7 @@ class Wellbeing {
 			description: 'Get 8 hours sleep',
 			type: 'heart-pulse',
 			repetitions: '',
-			date: '12-05-22',
+			date: '2023-05-29',
 			complete: false,
 			compDate: '',
 			_id: 'dfgdfghtr563',
@@ -47,7 +47,7 @@ class Wellbeing {
 			repetitions: '',
 			date: '12-05-22',
 			complete: true,
-			compDate: '12-05-22',
+			compDate: '2023-06-29',
 			_id: '34hidf97',
 		});
 		//for later debugging

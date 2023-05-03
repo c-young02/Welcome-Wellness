@@ -227,10 +227,10 @@ exports.searchCompGoal = function (req, res) {
 exports.showUpdate = function (req, res) {
 	console.log(`Request to update goal with ID ${req.params._id}`);
 	let user = req.user.user;
-	const goalId = req.params._id;
+	let goalId = req.params._id;
+
 	db.showUpdate(user, goalId)
 		.then((goal) => {
-			console.log(`Rendering goal: ${JSON.stringify(goal)}`);
 			res.render('goals/updateGoal', {
 				title: 'Update Goal',
 				user: req.user,
