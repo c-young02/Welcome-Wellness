@@ -128,7 +128,7 @@ exports.searchCompGoal = function (req, res) {
 };
 
 exports.showUpdate = function (req, res) {
-	console.log(`Request to update goal with ID ${req.params._id}`);
+	console.log(`Attempting to update goal with ID ${req.params._id}`);
 	let user = req.user.user;
 	let goalId = req.params._id;
 
@@ -141,7 +141,6 @@ exports.showUpdate = function (req, res) {
 			});
 		})
 		.catch((err) => {
-			console.log('Error: ');
 			console.log(JSON.stringify(err));
 		});
 };
@@ -169,11 +168,8 @@ exports.updateGoal = function (req, res) {
 };
 
 exports.deleteGoal = function (req, res) {
-	console.log('Received delete goal request.');
 	const goalId = req.params._id;
-	console.log(`Deleting goal with ID ${goalId}.`);
 	let user = req.user.user;
-	console.log(`Deleting goal for user ${user}.`);
 	db.deleteGoal(goalId, user)
 		.then(() => {
 			console.log(
@@ -183,7 +179,6 @@ exports.deleteGoal = function (req, res) {
 			res.redirect('/goals');
 		})
 		.catch((err) => {
-			console.log('Error deleting goal:');
 			console.log(JSON.stringify(err));
 			res.status(500).send('Error deleting goal');
 		});

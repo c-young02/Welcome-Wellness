@@ -32,7 +32,7 @@ exports.registerUser = function (req, res) {
 			return;
 		}
 		userDao.create(user, password);
-		console.log('Registered user');
+		console.log('Registered', user);
 		req.flash('registered', 'Registration complete');
 		res.redirect('/login');
 	});

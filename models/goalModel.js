@@ -22,8 +22,6 @@ class Wellbeing {
 			compDate: '',
 			_id: 'uerht9uhw',
 		});
-		//for later debugging
-		console.log('Goal 1 inserted');
 
 		this.db.insert({
 			author: 'CYoung',
@@ -36,8 +34,6 @@ class Wellbeing {
 			compDate: '',
 			_id: 'dfgdfghtr563',
 		});
-		//for later debugging
-		console.log('Goal 2 inserted');
 
 		this.db.insert({
 			author: 'CYoung',
@@ -50,14 +46,14 @@ class Wellbeing {
 			compDate: '2023-06-29',
 			_id: '34hidf97',
 		});
-		//for later debugging
-		console.log('Goal 3 inserted');
+
+		console.log('Test goals inserted');
 	}
 
 	getEntries() {
 		//return a Promise object, which can be resolved or rejected
 		return new Promise((resolve, reject) => {
-			//find(author:'Peter) retrieves the data,
+			//finds the entries for the user currently logged in
 			//with error first callback function, err=error, entries=data
 			this.db.find({ author: user }, function (err, entries) {
 				//if error occurs reject Promise
@@ -84,10 +80,9 @@ class Wellbeing {
 			complete: false,
 			compDate: '',
 		};
-		console.log('entry created', entry);
 		this.db.insert(entry, function (err, doc) {
 			if (err) {
-				console.log('Error inserting document', subject);
+				console.log('Error inserting document', title);
 			} else {
 				console.log('document inserted into the database', doc);
 			}
@@ -101,7 +96,6 @@ class Wellbeing {
 					reject(err);
 				} else {
 					resolve(goals);
-					console.log('getGoals returns: ', goals);
 				}
 			});
 		});
@@ -150,10 +144,10 @@ class Wellbeing {
 				{ author: user, title: { $regex: regExpression }, complete: false },
 				function (err, goals) {
 					if (err) {
+						console.error(`Error searching goal: ${err}`);
 						reject(err);
 					} else {
 						resolve(goals);
-						console.log('Search returns: ', goals);
 					}
 				}
 			);
@@ -167,10 +161,10 @@ class Wellbeing {
 				{ author: user, title: { $regex: regExpression }, complete: true },
 				function (err, complete) {
 					if (err) {
+						console.error(`Error searching goal: ${err}`);
 						reject(err);
 					} else {
 						resolve(complete);
-						console.log('Search returns:', complete);
 					}
 				}
 			);
@@ -202,7 +196,6 @@ class Wellbeing {
 					if (err) {
 						reject(err);
 					} else {
-						console.log(`numUpdated: ${numUpdated}`);
 						console.log(`updatedGoal: ${JSON.stringify(updatedGoal)}`);
 						resolve(numUpdated);
 					}

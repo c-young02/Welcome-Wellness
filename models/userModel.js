@@ -29,7 +29,6 @@ class UserDAO {
 				user: username,
 				password: hash,
 			};
-			//console.log('user entry is: ', entry);
 			that.db.insert(entry, function (err) {
 				if (err) {
 					console.log("Can't insert user: ", username);

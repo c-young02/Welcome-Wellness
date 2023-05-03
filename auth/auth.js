@@ -27,7 +27,6 @@ exports.init = function (app) {
 			});
 		})
 	);
-
 	passport.serializeUser(function (user, cb) {
 		cb(null, user.user);
 	});
@@ -40,7 +39,6 @@ exports.init = function (app) {
 			cb(null, user);
 		});
 	});
-
 	app.use(passport.initialize());
 	app.use(passport.session());
 };
