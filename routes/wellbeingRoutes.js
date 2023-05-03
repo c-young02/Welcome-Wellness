@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/wellbeingControllers.js');
+const userController = require('../controllers/userController.js');
+const goalController = require('../controllers/goalController.js');
 const auth = require('../auth/auth.js');
 const { ensureLoggedIn } = require('connect-ensure-login');
 
@@ -8,40 +10,52 @@ router.get('/', controller.showHome);
 router.get('/nutrition', ensureLoggedIn('/login'), controller.showNutrition);
 router.get('/fitness', ensureLoggedIn('/login'), controller.showFitness);
 router.get('/lifestyle', ensureLoggedIn('/login'), controller.showLifestyle);
-router.get('/goals', ensureLoggedIn('/login'), controller.getGoals);
-router.get('/goals/:_id', controller.completeGoal);
-router.get('/complete', ensureLoggedIn('/login'), controller.getCompleteGoals);
-router.get('/update/:_id', ensureLoggedIn('/login'), controller.showUpdate);
-router.post('/delete/:_id', ensureLoggedIn('/login'), controller.deleteGoal);
-router.post('/updated/:_id', controller.updateGoal);
-router.post('/search', ensureLoggedIn('/login'), controller.searchGoal);
+router.get('/goals', ensureLoggedIn('/login'), goalController.getGoals);
+router.get('/goals/:_id', goalController.completeGoal);
+router.get(
+	'/complete',
+	ensureLoggedIn('/login'),
+	goalController.getCompleteGoals
+);
+router.get('/update/:_id', ensureLoggedIn('/login'), goalController.showUpdate);
+router.post(
+	'/delete/:_id',
+	ensureLoggedIn('/login'),
+	goalController.deleteGoal
+);
+router.post('/updated/:_id', goalController.updateGoal);
+router.post('/search', ensureLoggedIn('/login'), goalController.searchGoal);
 router.post(
 	'/searchComplete',
 	ensureLoggedIn('/login'),
-	controller.searchCompGoal
+	goalController.searchCompGoal
 );
-router.get('/create', ensureLoggedIn('/login'), controller.createGoal);
+router.get('/create', ensureLoggedIn('/login'), goalController.createGoal);
 router.get('/about', controller.showAbout);
-router.get('/login', controller.checkNotAuthenticated, controller.showLogin);
+router.get(
+	'/login',
+	userController.checkNotAuthenticated,
+	userController.showLogin
+);
 router.get(
 	'/register',
-	controller.checkNotAuthenticated,
-	controller.showRegister
+	userController.checkNotAuthenticated,
+	userController.showRegister
 );
 router.post(
 	'/register',
-	controller.checkNotAuthenticated,
-	controller.registerUser
+	userController.checkNotAuthenticated,
+	userController.registerUser
 );
 router.post(
 	'/login',
-	controller.checkNotAuthenticated,
+	userController.checkNotAuthenticated,
 	auth.authorize('/login'),
-	controller.postLogin
+	userController.postLogin
 );
-router.post('/create', ensureLoggedIn('/login'), controller.createEntry);
+router.post('/create', ensureLoggedIn('/login'), goalController.createEntry);
 
-router.get('/logout', controller.logout);
+router.get('/logout', userController.logout);
 
 router.use(function (req, res) {
 	res.status(404);
