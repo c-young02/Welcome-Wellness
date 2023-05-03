@@ -93,6 +93,7 @@ class Wellbeing {
 			}
 		});
 	}
+
 	getGoals(user) {
 		return new Promise((resolve, reject) => {
 			this.db.find({ author: user, complete: false }, function (err, goals) {
@@ -188,6 +189,25 @@ class Wellbeing {
 					resolve(goal);
 				}
 			});
+		});
+	}
+
+	updateGoal(goalId, updatedGoal) {
+		return new Promise((resolve, reject) => {
+			this.db.update(
+				{ _id: goalId },
+				{ $set: updatedGoal },
+				{},
+				(err, numUpdated) => {
+					if (err) {
+						reject(err);
+					} else {
+						console.log(`numUpdated: ${numUpdated}`);
+						console.log(`updatedGoal: ${JSON.stringify(updatedGoal)}`);
+						resolve(numUpdated);
+					}
+				}
+			);
 		});
 	}
 }
