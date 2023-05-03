@@ -38,7 +38,7 @@ exports.registerUser = function (req, res) {
 	});
 };
 
-exports.authorize = function (redirect) {
+exports.authenticate = function (redirect) {
 	return auth.passport.authenticate('local', { failureRedirect: redirect });
 };
 

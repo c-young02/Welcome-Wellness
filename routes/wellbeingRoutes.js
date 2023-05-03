@@ -50,7 +50,7 @@ router.post(
 router.post(
 	'/login',
 	userController.checkNotAuthenticated,
-	auth.authorize('/login'),
+	auth.authenticate('/login'),
 	userController.postLogin
 );
 router.post('/create', ensureLoggedIn('/login'), goalController.createEntry);

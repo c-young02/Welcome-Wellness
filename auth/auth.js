@@ -1,25 +1,29 @@
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel');
 
 exports.init = function (app) {
+	// Use passport-local strategy to authenticate users
 	passport.use(
-		new Strategy(function (username, password, cb) {
-			// cb is callback
+		new LocalStrategy(function (username, password, cb) {
+			// Look up user
 			userModel.lookup(username, function (err, user) {
 				if (err) {
 					console.log('Error looking up user', err);
 					return cb(err);
 				}
+				// If user is not found, return false to the callback
 				if (!user) {
 					console.log('User ', username, ' not found');
 					return cb(null, false);
 				}
-				//compare provided password with stored password
+				// Compare provided password with stored password
 				bcrypt.compare(password, user.password, function (err, result) {
 					if (result) {
+						// Returns user object if the password is correct
 						cb(null, user);
+						// Returns false if the password is wrong
 					} else {
 						cb(null, false);
 					}
@@ -27,10 +31,12 @@ exports.init = function (app) {
 			});
 		})
 	);
+	// Serialize user into session
 	passport.serializeUser(function (user, cb) {
 		cb(null, user.user);
 	});
 
+	// Deserialize user  from session
 	passport.deserializeUser(function (id, cb) {
 		userModel.lookup(id, function (err, user) {
 			if (err) {
@@ -42,6 +48,6 @@ exports.init = function (app) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 };
-exports.authorize = function (redirect) {
+exports.authenticate = function (redirect) {
 	return passport.authenticate('local', { failureRedirect: redirect });
 };
