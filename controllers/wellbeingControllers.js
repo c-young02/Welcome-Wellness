@@ -185,6 +185,7 @@ exports.searchGoal = function (req, res) {
 				res.render('goals/goals', {
 					title: 'Goals',
 					goals: goals,
+					user: req.user,
 				});
 			} else {
 				res.render('goals/goals', {
@@ -209,6 +210,7 @@ exports.searchCompGoal = function (req, res) {
 			if (complete.length > 0) {
 				res.render('goals/completeGoals', {
 					title: 'Complete Goals',
+					user: req.user,
 					complete: complete,
 				});
 			} else {
@@ -232,7 +234,7 @@ exports.showUpdate = function (req, res) {
 	db.showUpdate(user, goalId)
 		.then((goal) => {
 			res.render('goals/updateGoal', {
-				title: 'Update Goal',
+				title: 'Modify Goal',
 				user: req.user,
 				goal: goal,
 			});
@@ -262,5 +264,26 @@ exports.updateGoal = function (req, res) {
 			console.log('Error: ');
 			console.log(JSON.stringify(err));
 			res.status(500).send('Error updating goal');
+		});
+};
+
+exports.deleteGoal = function (req, res) {
+	console.log('Received delete goal request.');
+	const goalId = req.params._id;
+	console.log(`Deleting goal with ID ${goalId}.`);
+	let user = req.user.user;
+	console.log(`Deleting goal for user ${user}.`);
+	db.deleteGoal(goalId, user)
+		.then(() => {
+			console.log(
+				`Goal with ID ${goalId} successfully deleted for user ${user}.`
+			);
+			req.flash('success', 'Goal deleted');
+			res.redirect('/goals');
+		})
+		.catch((err) => {
+			console.log('Error deleting goal:');
+			console.log(JSON.stringify(err));
+			res.status(500).send('Error deleting goal');
 		});
 };

@@ -12,7 +12,8 @@ router.get('/goals', ensureLoggedIn('/login'), controller.getGoals);
 router.get('/goals/:_id', controller.completeGoal);
 router.get('/complete', ensureLoggedIn('/login'), controller.getCompleteGoals);
 router.get('/update/:_id', ensureLoggedIn('/login'), controller.showUpdate);
-router.post('/updated/:_id', ensureLoggedIn('/login'), controller.updateGoal);
+router.post('/delete/:_id', ensureLoggedIn('/login'), controller.deleteGoal);
+router.post('/updated/:_id', controller.updateGoal);
 router.post('/search', ensureLoggedIn('/login'), controller.searchGoal);
 router.post(
 	'/searchComplete',

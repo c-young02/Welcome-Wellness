@@ -145,9 +145,9 @@ class Wellbeing {
 	//Uses regular expression to perform partial search, i makes it case insensitive
 	searchGoal(user, title) {
 		return new Promise((resolve, reject) => {
-			const regexpression = new RegExp(title, 'i');
+			const regExpression = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: { $regex: regexpression }, complete: false },
+				{ author: user, title: { $regex: regExpression }, complete: false },
 				function (err, goals) {
 					if (err) {
 						reject(err);
@@ -162,9 +162,9 @@ class Wellbeing {
 
 	searchCompGoal(user, title) {
 		return new Promise((resolve, reject) => {
-			const regexpression = new RegExp(title, 'i');
+			const regExpression = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: { $regex: regexpression }, complete: true },
+				{ author: user, title: { $regex: regExpression }, complete: true },
 				function (err, complete) {
 					if (err) {
 						reject(err);
@@ -208,6 +208,23 @@ class Wellbeing {
 					}
 				}
 			);
+		});
+	}
+
+	deleteGoal(goalId, user) {
+		console.log(
+			`Attempting to delete goal with ID ${goalId} for user ${user}.`
+		);
+		return new Promise((resolve, reject) => {
+			this.db.remove({ _id: goalId, author: user }, {}, (err, numRemoved) => {
+				if (err) {
+					console.log(`Error deleting goal: ${err}`);
+					reject(err);
+				} else {
+					console.log(`numRemoved: ${numRemoved}`);
+					resolve(numRemoved);
+				}
+			});
 		});
 	}
 }
