@@ -242,3 +242,25 @@ exports.showUpdate = function (req, res) {
 			console.log(JSON.stringify(err));
 		});
 };
+
+exports.updateGoal = function (req, res) {
+	const goalId = req.params._id;
+	const updatedGoal = {
+		title: req.body.title,
+		description: req.body.description,
+		type: req.body.type,
+		repetitions: req.body.repetitions,
+		date: req.body.date,
+		compDate: req.body.compDate,
+	};
+	db.updateGoal(goalId, updatedGoal)
+		.then(() => {
+			req.flash('success', 'Goal updated');
+			res.redirect('/goals');
+		})
+		.catch((err) => {
+			console.log('Error: ');
+			console.log(JSON.stringify(err));
+			res.status(500).send('Error updating goal');
+		});
+};

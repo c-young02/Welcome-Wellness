@@ -13,9 +13,9 @@
 			<div class="row">
 				<div class="mx-auto col-10 col-md-8 col-lg-5">
 					<!-- Form -->
-					<form action="/create" method="post">
-						<!-- Input fields -->
-						{{#goal}}
+					<!-- Input fields -->
+					{{#goal}}
+						<form action="/updated/{{_id}}" method="post">
 							<div class="form-group">
 								<label for="title">Goal Title</label>
 								<input type="text" class="form-control form-control-lg" id="title" value="{{title}}" name="title" maxlength="20" required />
@@ -25,9 +25,9 @@
 								<input type="text" class="form-control form-control-lg" id="description" value="{{description}}" name="description" maxlength="300" required />
 							</div>
 							<div class="form-group">
-								<label for="type">Goal Type:</label>
+								<label for="type">Goal Type <i class="fa-solid fa-{{type}}"></i>: </label>
 								<select class="form-control form-control-lg" id="type" name="type" required>
-									<option disabled selected value="">Goal Type</option>
+									<option selected value="{{type}}">Current Type</option>
 									<option value="apple-whole">Nutrition</option>
 									<option value="person-running">Fitness</option>
 									<option value="heart-pulse">Lifestyle</option>
@@ -47,13 +47,13 @@
 							</div>
 							<div class="d-grid gap-2">
 								<button type="submit" class="btn btn-lg btn-primary mt-3">Update</button>
-								<button type="delete" class="btn btn-lg btn-danger mt-3">Delete</button>
-							</div>
-						{{/goal}}
-					</form>
-					<!-- Form end -->
+						</form>
+						<button type="delete" class="btn btn-lg btn-danger mt-3">Delete</button>
+					{{/goal}}
 				</div>
+				<!-- Form end -->
 			</div>
+		</div>
 		</div>
 		<footer class="mt-auto">
 			{{>components/footer}}
