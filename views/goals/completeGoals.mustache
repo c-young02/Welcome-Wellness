@@ -34,16 +34,16 @@
 		{{/error}}
 		<div class="row">
 			{{#complete}}
-				<div class="col-sm-3 mb-3">
-					<div class="card position-relative">
+				<div class="col-sm-3 mb-3 text-light">
+					<div class="card bg-{{type}} position-relative">
 						<div class="card-body">
 							<a href="/update/{{_id}}"class="text-right position-absolute top-0 end-0 me-2 mt-3">
-								<i class="fa-solid fa-pen-to-square fa-lg"></i>
+								<i class="fa-solid fa-pen-to-square fa-lg" style="color: #ffffff;"></i>
 							</a>
 							<h5 class="card-title">{{title}}
 								<i class="fa-solid fa-{{type}}"></i>
 							</h5>
-							<h6 class="card-subtitle mb-2 text-muted">{{description}}</h6>
+							<h6 class="card-subtitle mb-2">{{description}}</h6>
 							<div class="row">
 								<h7 class="card-text">Repetitions: {{repetitions}}</h7>
 							</div>
