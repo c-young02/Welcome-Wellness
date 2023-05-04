@@ -35,7 +35,7 @@ npm run start
   - Create categorised goals
   - Update goals
   - Delete goals
-  - Search goals
+  - Search goals - This was added to help users search through their goals if they have a large number of them.
   - Marks goals as complete
   - View completed goals
 
