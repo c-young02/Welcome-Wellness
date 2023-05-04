@@ -24,17 +24,17 @@ Whenever you want to run the project type
 npm run start
 ```
 ## Features
--View information about this sight on the home page and about page
--Register for an account
--Sign in to an account
--View information on wellbeing
- -Nutrition
- -Fitness
- -Lifestyle
--Manage personal goals
- -Create categorised goals
- -Update goals
- -Delete goals
- -Search goals
- -Marks goals as complete
- -View completed goals
+- View information about this sight on the home page and about page
+- Register for an account
+- Sign in to an account
+- View information on wellbeing
+  - Nutrition
+  - Fitness
+  - Lifestyle
+- Manage personal goals
+  - Create categorised goals
+  - Update goals
+  - Delete goals
+  - Search goals
+  - Marks goals as complete
+  - View completed goals
