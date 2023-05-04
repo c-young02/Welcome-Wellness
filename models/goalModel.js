@@ -4,65 +4,67 @@ class Wellbeing {
 		if (dbFilePath) {
 			this.db = new nedb({ filename: dbFilePath, autoload: true });
 			console.log('DB connected to ' + dbFilePath);
-		} else {
+		} //If no db path is specified it is created in memory
+		else {
 			this.db = new nedb();
+			console.log('Running DB in memory');
 		}
 	}
 
+	//Inserts test data for test user
 	init() {
-		//!remove
-		this.db.insert({
-			author: 'CYoung',
-			title: 'Run',
-			description: 'go for a run',
-			type: 'person-running',
-			repetitions: 2,
-			date: '2023-05-30',
-			complete: false,
-			compDate: '',
-			_id: 'uerht9uhw',
+		const testGoals = [
+			{
+				author: 'CYoung',
+				title: 'Run',
+				description: 'Go for a run',
+				type: 'person-running',
+				repetitions: 2,
+				date: '2023-05-30',
+				complete: false,
+				compDate: '',
+				_id: 't4jZE0tpeaJCHdSH',
+			},
+			{
+				author: 'CYoung',
+				title: 'Sleep',
+				description: 'Get 8 hours sleep',
+				type: 'heart-pulse',
+				repetitions: '',
+				date: '2023-05-29',
+				complete: false,
+				compDate: '',
+				_id: 'Mkyb3oOPgZfPOSxl',
+			},
+			{
+				author: 'CYoung',
+				title: 'Eat',
+				description: 'Eat some healthy food',
+				type: 'apple-whole',
+				repetitions: '',
+				date: '12-05-22',
+				complete: true,
+				compDate: '2023-06-29',
+				_id: '34hi5NulXCwneySdKkNrdf97',
+			},
+		];
+		testGoals.forEach((goal) => {
+			this.db.insert(goal);
 		});
-
-		this.db.insert({
-			author: 'CYoung',
-			title: 'Sleep',
-			description: 'Get 8 hours sleep',
-			type: 'heart-pulse',
-			repetitions: '',
-			date: '2023-05-29',
-			complete: false,
-			compDate: '',
-			_id: 'dfgdfghtr563',
-		});
-
-		this.db.insert({
-			author: 'CYoung',
-			title: 'Eat',
-			description: 'Eat some healthy food',
-			type: 'apple-whole',
-			repetitions: '',
-			date: '12-05-22',
-			complete: true,
-			compDate: '2023-06-29',
-			_id: '34hidf97',
-		});
-
 		console.log('Test goals inserted');
 	}
 
 	getEntries() {
-		//return a Promise object, which can be resolved or rejected
+		//Returns a Promise object, which can be resolved or rejected
 		return new Promise((resolve, reject) => {
-			//finds the entries for the user currently logged in
-			//with error first callback function, err=error, entries=data
+			//Finds the entries for the user currently logged in
 			this.db.find({ author: user }, function (err, entries) {
-				//if error occurs reject Promise
+				//If error occurs reject Promise
 				if (err) {
 					reject(err);
-					//if no error resolve the promise and return the data
+					//If no error resolve the promise and return the data
 				} else {
 					resolve(entries);
-					//to see what the returned data looks like
 					console.log('getEntries() returns: ', entries);
 				}
 			});
@@ -70,6 +72,7 @@ class Wellbeing {
 	}
 
 	addEntry(user, title, description, type, repetitions, date) {
+		//Sets what matches each field for the entry
 		var entry = {
 			author: user,
 			title: title,
@@ -80,6 +83,7 @@ class Wellbeing {
 			complete: false,
 			compDate: '',
 		};
+		//Inserts the entry array into the DB
 		this.db.insert(entry, function (err, doc) {
 			if (err) {
 				console.log('Error inserting document', title);
@@ -89,6 +93,7 @@ class Wellbeing {
 		});
 	}
 
+	//Searches the DB for the users incomplete goals
 	getGoals(user) {
 		return new Promise((resolve, reject) => {
 			this.db.find({ author: user, complete: false }, function (err, goals) {
@@ -101,6 +106,7 @@ class Wellbeing {
 		});
 	}
 
+	//Searches the DB for the users complete goals
 	getCompleteGoals(user) {
 		return new Promise((resolve, reject) => {
 			this.db.find({ author: user, complete: true }, function (err, complete) {
@@ -113,6 +119,7 @@ class Wellbeing {
 		});
 	}
 
+	//Sets the goal completion status to complete
 	completeGoal(goalId) {
 		return new Promise((resolve, reject) => {
 			this.db.update(
@@ -120,7 +127,8 @@ class Wellbeing {
 				{
 					$set: {
 						complete: true,
-						compDate: new Date().toISOString().split('T')[0], //sets complete date to current date
+						//sets the completion date to the current date
+						compDate: new Date().toISOString().split('T')[0],
 					},
 				},
 				{},
@@ -135,9 +143,10 @@ class Wellbeing {
 		});
 	}
 
-	//Uses regular expression to perform partial search, i makes it case insensitive
+	//Searches for the users incomplete goals
 	searchGoal(user, title) {
 		return new Promise((resolve, reject) => {
+			//Uses regular expression to perform partial search, i makes it case insensitive
 			const regExpression = new RegExp(title, 'i');
 			this.db.find(
 				{ author: user, title: { $regex: regExpression }, complete: false },
@@ -153,8 +162,10 @@ class Wellbeing {
 		});
 	}
 
+	//Searches for the users complete goals
 	searchCompGoal(user, title) {
 		return new Promise((resolve, reject) => {
+			//Uses regular expression to perform partial search, i makes it case insensitive
 			const regExpression = new RegExp(title, 'i');
 			this.db.find(
 				{ author: user, title: { $regex: regExpression }, complete: true },
@@ -170,6 +181,7 @@ class Wellbeing {
 		});
 	}
 
+	//finds the goal matching the user and goal ID
 	showUpdate(user, goalId) {
 		return new Promise((resolve, reject) => {
 			console.log(`Finding goal ${goalId} for user ${user}`);
@@ -185,6 +197,7 @@ class Wellbeing {
 		});
 	}
 
+	//Updates the goal to the values in the updatedGoal array
 	updateGoal(goalId, updatedGoal) {
 		return new Promise((resolve, reject) => {
 			this.db.update(
@@ -203,6 +216,7 @@ class Wellbeing {
 		});
 	}
 
+	//Deletes the goal matching the user and goal ID
 	deleteGoal(goalId, user) {
 		console.log(
 			`Attempting to delete goal with ID ${goalId} for user ${user}.`
