@@ -2,6 +2,7 @@ const wellbeingDAO = require('../models/goalModel');
 const db = new wellbeingDAO();
 db.init(); //!remove
 
+//Renders create goal page
 exports.createGoal = function (req, res) {
 	res.render('goals/createGoal', {
 		title: 'Create Goal',
@@ -9,6 +10,7 @@ exports.createGoal = function (req, res) {
 	});
 };
 
+//Creates a goal entry
 exports.createEntry = function (req, res) {
 	console.log('Creating new entry');
 	const user = req.user.user;
@@ -17,6 +19,7 @@ exports.createEntry = function (req, res) {
 		response.status(400).send('Entries must have an author.');
 		return;
 	}
+	//Takes values from the form and passes them to the goal model
 	db.addEntry(
 		user,
 		req.body.title,
@@ -28,6 +31,7 @@ exports.createEntry = function (req, res) {
 	res.redirect('/goals');
 };
 
+//Displays a list of incomplete goals for the user
 exports.getGoals = function (req, res) {
 	let user = req.user.user;
 	const successMsg = req.flash('success');
@@ -46,6 +50,7 @@ exports.getGoals = function (req, res) {
 		});
 };
 
+//Displays a list of complete goals for the user
 exports.getCompleteGoals = function (req, res) {
 	let user = req.user.user;
 	db.getCompleteGoals(user)
@@ -62,6 +67,7 @@ exports.getCompleteGoals = function (req, res) {
 		});
 };
 
+//Marks a goal as complete
 exports.completeGoal = function (req, res) {
 	const goalId = req.params._id;
 	db.completeGoal(goalId)
@@ -76,6 +82,7 @@ exports.completeGoal = function (req, res) {
 		});
 };
 
+//Renders searched incomplete goals
 exports.searchGoal = function (req, res) {
 	console.log('searching title', req.body.title);
 	let user = req.user.user;
@@ -101,6 +108,7 @@ exports.searchGoal = function (req, res) {
 		});
 };
 
+//Renders searched complete goals
 exports.searchCompGoal = function (req, res) {
 	console.log('searching title', req.body.title);
 	let user = req.user.user;
@@ -114,7 +122,8 @@ exports.searchCompGoal = function (req, res) {
 					user: req.user,
 					complete: complete,
 				});
-			} else {
+			} //if no goals are found displays a message letting the user know
+			else {
 				res.render('goals/completeGoals', {
 					title: 'Goal Not Found',
 					user: req.user,
@@ -127,6 +136,7 @@ exports.searchCompGoal = function (req, res) {
 		});
 };
 
+//Renders a form to update a goal
 exports.showUpdate = function (req, res) {
 	console.log(`Attempting to update goal with ID ${req.params._id}`);
 	let user = req.user.user;
@@ -145,6 +155,7 @@ exports.showUpdate = function (req, res) {
 		});
 };
 
+//Handles the form details for the goal update
 exports.updateGoal = function (req, res) {
 	const goalId = req.params._id;
 	const updatedGoal = {
@@ -167,6 +178,7 @@ exports.updateGoal = function (req, res) {
 		});
 };
 
+//Deletes the goal
 exports.deleteGoal = function (req, res) {
 	const goalId = req.params._id;
 	let user = req.user.user;

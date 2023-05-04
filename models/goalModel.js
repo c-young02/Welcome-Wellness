@@ -108,7 +108,6 @@ class Wellbeing {
 					reject(err);
 				} else {
 					resolve(complete);
-					console.log('getCompleteGoals returns: ', complete);
 				}
 			});
 		});
