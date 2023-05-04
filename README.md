@@ -49,3 +49,7 @@ Sources of assets used for the website with each item being a link
 - [lifestyle.jpg](https://unsplash.com/photos/npxXWgQ33ZQ)
 - [nutrition.jpg](https://unsplash.com/photos/jUPOXXRNdcA)
 - Modified version of [registration.jpg](https://unsplash.com/photos/roJv_dmHKVA)
+
+Package documentation used during development
+ - [Passport-local documentation](https://www.passportjs.org/howtos/password/)
+ - [Bootstrap documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
