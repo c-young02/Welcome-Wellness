@@ -29,24 +29,17 @@ exports.registerUser = function (req, res) {
 		return;
 	}
 	//If the username is already used, displays an error message and prevents creation
-	userDao.lookup(
-		user,
-		function (err, u) {
-			if (u) {
-				req.flash('failure', 'User already exists');
-				res.redirect('/register');
-				return;
-			} //Registers the user and redirects to the home page
-			userDao.create(user, password);
-			console.log('Registered', user);
-			req.flash('registered', 'Registration complete');
-			res.redirect('/login');
-		}.catch((err) => {
-			console.log('Error: ');
-			console.log(JSON.stringify(err));
-			res.status(500).send('Error registering user');
-		})
-	);
+	userDao.lookup(user, function (err, u) {
+		if (u) {
+			req.flash('failure', 'User already exists');
+			res.redirect('/register');
+			return;
+		} //Registers the user and redirects to the home page
+		userDao.create(user, password);
+		console.log('Registered', user);
+		req.flash('registered', 'Registration complete');
+		res.redirect('/login');
+	});
 };
 
 //Brings failed authentication attempts back to the login page with an error message
