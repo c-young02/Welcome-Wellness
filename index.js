@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const flash = require('connect-flash');
+const flash = require('express-flash');
 
 app.use(
 	express.urlencoded({

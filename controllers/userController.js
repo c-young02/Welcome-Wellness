@@ -39,7 +39,10 @@ exports.registerUser = function (req, res) {
 };
 
 exports.authenticate = function (redirect) {
-	return auth.passport.authenticate('local', { failureRedirect: redirect });
+	return auth.passport.authenticate('local', {
+		failureRedirect: redirect,
+		failureFlash: true,
+	});
 };
 
 exports.postLogin = function (req, res) {

@@ -13,6 +13,11 @@
 					{{message}}
 				</div>
 			{{/message}}
+			{{#messages.error}}
+				<div class="alert alert-danger" role="alert">
+					{{messages.error}}
+				</div>
+			{{/messages.error}}
 		</div>
 		<div class="container">
 			<div class="row">

@@ -16,7 +16,9 @@ exports.init = function (app) {
 				// If user is not found, return false to the callback
 				if (!user) {
 					console.log('User ', username, ' not found');
-					return cb(null, false);
+					return cb(null, false, {
+						message: 'Incorrect username or password.',
+					});
 				}
 				// Compare provided password with stored password
 				bcrypt.compare(password, user.password, function (err, result) {
@@ -25,7 +27,7 @@ exports.init = function (app) {
 						cb(null, user);
 						// Returns false if the password is wrong
 					} else {
-						cb(null, false);
+						cb(null, false, { message: 'Incorrect username or password.' });
 					}
 				});
 			});
@@ -49,5 +51,8 @@ exports.init = function (app) {
 	app.use(passport.session());
 };
 exports.authenticate = function (redirect) {
-	return passport.authenticate('local', { failureRedirect: redirect });
+	return passport.authenticate('local', {
+		failureRedirect: redirect,
+		failureFlash: true,
+	});
 };
