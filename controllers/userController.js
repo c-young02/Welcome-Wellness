@@ -38,10 +38,10 @@ exports.registerUser = function (req, res) {
 	});
 };
 
-exports.authenticate = function (redirect) {
+exports.authenticate = function () {
 	return auth.passport.authenticate('local', {
-		failureRedirect: redirect,
-		failureFlash: true,
+		failureRedirect,
+		failureFlash,
 	});
 };
 

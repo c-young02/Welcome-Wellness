@@ -50,9 +50,9 @@ exports.init = function (app) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 };
-exports.authenticate = function (redirect) {
+exports.authenticate = function () {
 	return passport.authenticate('local', {
-		failureRedirect: redirect,
+		failureRedirect: '/login',
 		failureFlash: true,
 	});
 };
