@@ -143,38 +143,23 @@ class Wellbeing {
 		});
 	}
 
-	//Searches for the users incomplete goals
-	searchGoal(user, title) {
+	//Searches for the users goals
+	searchGoal(user, title, completion) {
 		return new Promise((resolve, reject) => {
 			//Uses regular expression to perform partial search, i makes it case insensitive
 			const regExpression = new RegExp(title, 'i');
 			this.db.find(
-				{ author: user, title: { $regex: regExpression }, complete: false },
+				{
+					author: user,
+					title: { $regex: regExpression },
+					complete: completion,
+				},
 				function (err, goals) {
 					if (err) {
 						console.error(`Error searching goal: ${err}`);
 						reject(err);
 					} else {
 						resolve(goals);
-					}
-				}
-			);
-		});
-	}
-
-	//Searches for the users complete goals
-	searchCompGoal(user, title) {
-		return new Promise((resolve, reject) => {
-			//Uses regular expression to perform partial search, i makes it case insensitive
-			const regExpression = new RegExp(title, 'i');
-			this.db.find(
-				{ author: user, title: { $regex: regExpression }, complete: true },
-				function (err, complete) {
-					if (err) {
-						console.error(`Error searching goal: ${err}`);
-						reject(err);
-					} else {
-						resolve(complete);
 					}
 				}
 			);

@@ -1,6 +1,6 @@
 const wellbeingDAO = require('../models/goalModel');
 const db = new wellbeingDAO();
-db.init(); //!remove
+db.init(); //Initializes test data
 
 //Renders create goal page
 exports.createGoal = function (req, res) {
@@ -87,7 +87,8 @@ exports.searchGoal = function (req, res) {
 	console.log('searching title', req.body.title);
 	let user = req.user.user;
 	let title = req.body.title;
-	db.searchGoal(user, title)
+	let completion = false;
+	db.searchGoal(user, title, completion)
 		.then((goals) => {
 			if (goals.length > 0) {
 				res.render('goals/goals', {
@@ -113,14 +114,14 @@ exports.searchCompGoal = function (req, res) {
 	console.log('searching title', req.body.title);
 	let user = req.user.user;
 	let title = req.body.title;
-
-	db.searchCompGoal(user, title)
-		.then((complete) => {
-			if (complete.length > 0) {
+	let completion = true;
+	db.searchGoal(user, title, completion)
+		.then((goals) => {
+			if (goals.length > 0) {
 				res.render('goals/completeGoals', {
 					title: 'Complete Goals',
 					user: req.user,
-					complete: complete,
+					complete: goals,
 				});
 			} //if no goals are found displays a message letting the user know
 			else {
