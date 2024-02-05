@@ -1,4 +1,5 @@
-# WAD2-CW2
+# Welcome Wellness
+[Live link](https://welcome-wellness.onrender.com/)
 
 ## How to run
 Clone the repository by typing the following in your terminal
