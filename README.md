@@ -4,11 +4,11 @@
 ## How to run
 Clone the repository by typing the following in your terminal
 ```
-git clone https://github.com/c-young02/WAD2-CW2
+git clone https://github.com/c-young02/Welcome-Wellness
 ```
 Go into the directory by typing 
 ```
-cd .\WAD2-CW2\
+cd .\Welcome-Wellness\
 ```
 then install the dependencies by typing the following in your terminal
 ```
